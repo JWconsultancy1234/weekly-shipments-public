@@ -3,8 +3,8 @@ Made-up shipments export for the AI journey, Builder step 11
 
 ## changes.py
 
-Prints the three biggest changes in pallets between the last week in a
-shipments export and the week before.
+Prints the three biggest percent changes in pallets between the last week in
+a shipments export and the week before.
 
 ### The rule
 
@@ -18,15 +18,17 @@ shipments export and the week before.
    added up per client and per route for both weeks. Clients and routes are
    then ranked together in one list. A client or route with no shipments in
    one of the two weeks counts as 0 pallets that week.
-4. **Change = last week − the week before.** The list is sorted by the size
-   of the change, so a drop of 23 ranks the same as a rise of 23. When two
-   changes are the same size, they are sorted by name so the output never
-   changes between runs. The top three are printed.
+4. **Change = (last week − the week before) ÷ the week before, as a percent.**
+   The list is sorted by the size of the change, so a drop of 23% ranks the
+   same as a rise of 23%. A client or route going from 0 pallets to any number
+   has no percentage: it is printed as `new` and ranks above all percentages.
+   When two changes are the same size, they are sorted by name so the output
+   never changes between runs. The top three are printed.
 5. Every row is counted, whatever its `status`.
 
-Routes collect more shipments than single clients, so they often fill the
-top three. In the sample, the biggest client change is Beta Foods (+22), in
-4th place, so it is not printed.
+Percentages favour small numbers, so a small client can outrank a busy route
+on few pallets. In the sample, Epsilon Garden (+11 pallets, +122.2%) ranks
+above BE-FR (−23 pallets, −32.4%), which does not make the top three.
 
 ### How to run
 
@@ -43,8 +45,8 @@ and `pallets` (a whole number).
 ### Output on the sample file
 
 ```
-Pallet changes, 2026-W41 -> 2026-W42 (clients and routes)
-1. route  BE-BE    25 ->   60  +35
-2. route  NL-BE    77 ->  101  +24
-3. route  BE-FR    71 ->   48  -23
+Pallet changes by percent, 2026-W41 -> 2026-W42 (clients and routes)
+1. route  BE-BE                       25 ->   60  +140.0%
+2. client Epsilon Garden (example)     9 ->   20  +122.2%
+3. client Delta Home (example)        28 ->    9  -67.9%
 ```
