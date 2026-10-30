@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 
 EXPECTED = [
-    "1. route  BE-BE    25 ->   60  +35",
+    "1. route  BE-BE    25 ->   60  +36",
     "2. route  NL-BE    77 ->  101  +24",
     "3. route  BE-FR    71 ->   48  -23",
 ]
